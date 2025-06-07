@@ -1,0 +1,50 @@
+  name: yalla_r7la_new
+  description: "A new Flutter project."
+  publish_to: 'none'
+  version: 1.0.0+1
+
+  environment:
+    sdk: ^3.8.0
+
+  dependencies:
+    flutter:
+      sdk: flutter
+    image: ^4.1.3
+    http: ^0.13.6
+    url_launcher: ^6.1.10
+    fl_chart: ^0.65.0
+    share_plus: ^7.2.1
+    google_maps_flutter: ^2.5.3
+    cupertino_icons: ^1.0.8
+    image_picker: ^1.1.2
+    intl: ^0.20.2
+    flutter_native_splash: ^2.4.6
+    mime: ^1.0.4
+
+  dev_dependencies:
+    flutter_test:
+      sdk: flutter
+    flutter_lints: ^5.0.0
+    icons_launcher: ^2.1.3
+
+  flutter:
+    uses-material-design: true
+    assets:
+      - assets/images/
+      - assets/icons/group_1_resized_1152.png
+      - assets/icons/group_1.png
+
+  flutter_native_splash:
+    image: assets/icons/group_1_resized_1152.png
+    color: "#CFDDC0"
+    android_12:
+      image: assets/icons/group_1.png
+      color: "#CFDDC0"
+
+  icons_launcher:
+    image_path: "assets/icons/group_1.png"
+    platforms:
+      android:
+        enable: true
+      ios:
+        enable: true
