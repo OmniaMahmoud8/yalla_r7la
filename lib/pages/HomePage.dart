@@ -51,14 +51,41 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _navigateToAddTrip() async {
-    final newTrip = await Navigator.push<Map<String, dynamic>>(
+    final result = await Navigator.push<dynamic>(
       context,
       MaterialPageRoute(builder: (_) => const NewTripPage()),
     );
 
-    if (newTrip != null) {
+    if (result != null) {
       setState(() {
-        trips.add(newTrip);
+        if (result is Map<String, dynamic>) {
+          trips.add(result);
+        }
+      });
+    }
+  }
+
+  void _navigateToTripDetails(int index) async {
+    final result = await Navigator.push<dynamic>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TripDetailsPage(trip: trips[index]),
+      ),
+    );
+
+    if (result != null) {
+      setState(() {
+        if (result == 'delete') {
+          trips.removeAt(index);
+        } else if (result is Map<String, dynamic>) {
+          final tripId = result['id'];
+          final tripIndex = trips.indexWhere((trip) => trip['id'] == tripId);
+          if (tripIndex != -1) {
+            trips[tripIndex] = result;
+          } else {
+            trips.add(result);
+          }
+        }
       });
     }
   }
@@ -66,7 +93,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 207, 221, 192), 
+      backgroundColor: const Color.fromARGB(255, 207, 221, 192),
       drawer: Drawer(
         backgroundColor: const Color.fromARGB(255, 207, 221, 192),
         shape: const RoundedRectangleBorder(
@@ -153,7 +180,7 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         title: const Text(
-          "Hi!You want to add new items?",
+          "Hi! You want to add new items?",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -218,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text("history",
+                    child: const Text("History",
                         style: TextStyle(fontSize: 16, color: Colors.white)),
                   ),
                   TextButton(
@@ -228,7 +255,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text("Medicine",
+                    child: const Text("Medical",
                         style: TextStyle(fontSize: 16, color: Colors.white)),
                   ),
                   TextButton(
@@ -238,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text("funny",
+                    child: const Text("Adventure",
                         style: TextStyle(fontSize: 16, color: Colors.white)),
                   ),
                 ],
@@ -256,14 +283,7 @@ class _HomePageState extends State<HomePage> {
                             ? List<String>.from(trip['imageData'])
                             : [];
                         return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TripDetailsPage(trip: trip),
-                              ),
-                            );
-                          },
+                          onTap: () => _navigateToTripDetails(index),
                           child: Card(
                             margin: const EdgeInsets.symmetric(vertical: 8),
                             shape: RoundedRectangleBorder(
@@ -284,6 +304,8 @@ class _HomePageState extends State<HomePage> {
                                         height: 150,
                                         width: double.infinity,
                                         fit: BoxFit.cover,
+                                        errorBuilder: (context, error, stackTrace) =>
+                                            const Text("Image not available"),
                                       ),
                                     ),
                                   Padding(
@@ -292,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          trip['name'] ?? 'No Name',
+                                          trip['title'] ?? 'No Title',
                                           style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
