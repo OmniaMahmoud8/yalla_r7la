@@ -24,8 +24,7 @@ class OwnerCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              icon: const Icon(Icons.edit, color: Color(0xFF558B2F)
-),
+              icon: const Icon(Icons.edit, color: Color(0xFF558B2F)),
               onPressed: onEdit,
             ),
             IconButton(

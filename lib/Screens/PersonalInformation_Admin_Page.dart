@@ -29,7 +29,7 @@ class PersonalInformation_Admin_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:   const Color.fromARGB(255, 207, 221, 192),
+      backgroundColor: const Color.fromARGB(255, 207, 221, 192),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -55,7 +55,11 @@ class PersonalInformation_Admin_Page extends StatelessWidget {
                         ? FileImage(File(imagePath!))
                         : null,
                     child: imagePath == null
-                        ? const Icon(Icons.person, size: 70, color: Colors.white)
+                        ? const Icon(
+                            Icons.person,
+                            size: 70,
+                            color: Colors.white,
+                          )
                         : null,
                   ),
                   Positioned(

@@ -1,6 +1,6 @@
 // pages/onboardingScreen1.dart
 import 'package:flutter/material.dart';
-import 'onboardingScreen2.dart'; 
+import 'onboardingScreen2.dart';
 
 class OnboardingScreen1 extends StatelessWidget {
   const OnboardingScreen1({super.key});
@@ -13,14 +13,11 @@ class OnboardingScreen1 extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start, 
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
               alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/group_32.png',
-                height: 300,
-              ),
+              child: Image.asset('assets/images/group_32.png', height: 300),
             ),
             const SizedBox(height: 30),
             const Text(
@@ -40,7 +37,9 @@ class OnboardingScreen1 extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const OnboardingScreen2()),
+                    MaterialPageRoute(
+                      builder: (context) => const OnboardingScreen2(),
+                    ),
                   );
                 },
                 child: const Text("Next"),

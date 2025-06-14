@@ -65,9 +65,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 207, 221, 192),
+      backgroundColor: const Color.fromARGB(255, 207, 221, 192),
       appBar: AppBar(
-        backgroundColor:const Color.fromARGB(255, 207, 221, 192),
+        backgroundColor: const Color.fromARGB(255, 207, 221, 192),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.home, color: Colors.black),
@@ -78,7 +78,10 @@ class _ProfilePageState extends State<ProfilePage> {
             );
           },
         ),
-        title: const Text('Profile page', style: TextStyle(color: Colors.black)),
+        title: const Text(
+          'Profile page',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -96,13 +99,18 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundColor: Colors.grey[300],
                         backgroundImage: _imageFile != null
                             ? FileImage(_imageFile!)
-                            : const AssetImage('assets/images/profile.jpg') as ImageProvider,
+                            : const AssetImage('assets/images/profile.jpg')
+                                  as ImageProvider,
                       ),
                       Positioned(
                         bottom: 0,
                         right: 0,
                         child: IconButton(
-                          icon: const Icon(Icons.add_circle, color: Color.fromARGB(255, 207, 221, 192), size: 30),
+                          icon: const Icon(
+                            Icons.add_circle,
+                            color: Color.fromARGB(255, 207, 221, 192),
+                            size: 30,
+                          ),
                           onPressed: _showImagePickerOptions,
                         ),
                       ),
@@ -114,7 +122,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Text(
                         widget.fullName,
-                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -149,34 +160,38 @@ class _ProfilePageState extends State<ProfilePage> {
               }),
               buildListTile("Social Connect", Icons.share, () {}),
               const SizedBox(height: 10),
-              
+
               buildSectionTitle("Notifications"),
-            ListTile(
-              leading: const Icon(Icons.notifications),
-              title: const Text(" Notifications"), 
-              trailing: Switch(
-                value: pushNotifications,
-                onChanged: (value) {
-                  setState(() {
-                    pushNotifications = value;});},
-                    activeColor: const Color.fromARGB(255, 101, 130, 105),
-                    inactiveThumbColor: Colors.grey,
-                    inactiveTrackColor: Colors.grey[300],),),
+              ListTile(
+                leading: const Icon(Icons.notifications),
+                title: const Text(" Notifications"),
+                trailing: Switch(
+                  value: pushNotifications,
+                  onChanged: (value) {
+                    setState(() {
+                      pushNotifications = value;
+                    });
+                  },
+                  activeColor: const Color.fromARGB(255, 101, 130, 105),
+                  inactiveThumbColor: Colors.grey,
+                  inactiveTrackColor: Colors.grey[300],
+                ),
+              ),
               const SizedBox(height: 10),
 
               buildSectionTitle("Support"),
               buildListTile("Contact Support", Icons.support, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ContactUsPage()),
-                  );
-                  }),
+                  MaterialPageRoute(
+                    builder: (context) => const ContactUsPage(),
+                  ),
+                );
+              }),
 
               const SizedBox(height: 10),
               buildSectionTitle("setting"),
-              buildListTile("Appearance", Icons.dark_mode, () {
-                
-              }),
+              buildListTile("Appearance", Icons.dark_mode, () {}),
               const SizedBox(height: 10),
 
               buildSectionTitle("Other"),
@@ -186,7 +201,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 showModalBottomSheet(
                   context: context,
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
                   ),
                   builder: (_) => Padding(
                     padding: const EdgeInsets.all(20),
@@ -208,7 +225,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                           icon: const Icon(Icons.logout),
                           label: const Text("Logout"),
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
                         ),
                         TextButton(
                           onPressed: () => Navigator.pop(context),
@@ -223,7 +242,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 showModalBottomSheet(
                   context: context,
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
                   ),
                   builder: (_) => Padding(
                     padding: const EdgeInsets.all(20),
@@ -245,7 +266,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                           icon: const Icon(Icons.delete_forever),
                           label: const Text("Delete Account"),
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
                         ),
                         TextButton(
                           onPressed: () => Navigator.pop(context),
@@ -279,12 +302,21 @@ class _ProfilePageState extends State<ProfilePage> {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+        ),
       ),
     );
   }
 
-  Widget buildSwitchTile(String title, IconData icon, bool value, Function(bool) onChanged) {
+  Widget buildSwitchTile(
+    String title,
+    IconData icon,
+    bool value,
+    Function(bool) onChanged,
+  ) {
     return ListTile(
       leading: Icon(icon, color: Colors.black),
       title: Text(title, style: const TextStyle(fontSize: 16)),

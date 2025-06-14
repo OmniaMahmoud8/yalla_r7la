@@ -23,14 +23,8 @@ class _ChooseCardPageState extends State<ChooseCardPage> {
   Future<void> fetchCards() async {
     await Future.delayed(const Duration(seconds: 2));
     cards = [
-      {
-        'title': 'Business card',
-        'number': '4325112212341122',
-      },
-      {
-        'title': 'Wise regular',
-        'number': '9876554433214444',
-      },
+      {'title': 'Business card', 'number': '4325112212341122'},
+      {'title': 'Wise regular', 'number': '9876554433214444'},
     ];
     setState(() {
       isLoading = false;
@@ -81,10 +75,10 @@ class _ChooseCardPageState extends State<ChooseCardPage> {
                         context,
                         MaterialPageRoute(
                           builder: (_) => ElectricPaymentPage(
-                            name: 'Customer Name', 
+                            name: 'Customer Name',
                             cardNumber: selectedCard['number'],
-                            provider: 'Provider Name', 
-                            internetFee: 100.0, 
+                            provider: 'Provider Name',
+                            internetFee: 100.0,
                             tax: 10.0,
                           ),
                         ),

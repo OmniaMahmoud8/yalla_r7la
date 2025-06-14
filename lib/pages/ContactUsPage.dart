@@ -33,7 +33,11 @@ class ContactUsPage extends StatelessWidget {
           children: [
             const SizedBox(height: 30),
 
-            const Icon(Icons.support_agent, size: 100, color: Color.fromARGB(255, 207, 221, 192)),
+            const Icon(
+              Icons.support_agent,
+              size: 100,
+              color: Color.fromARGB(255, 207, 221, 192),
+            ),
             const SizedBox(height: 20),
 
             const Text(
@@ -55,21 +59,23 @@ class ContactUsPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Chat_with_admin_Page()),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Chat_with_admin_Page(),
+                    ),
                   );
-                  },
-                  icon: const Icon(Icons.chat),
-                  label: const Text("Chat with Us"),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    backgroundColor: const Color.fromARGB(255, 101, 130, 105),
-                    textStyle: const TextStyle(fontSize: 16),
-                    ),
-                    ),
-                    ),
-                    const SizedBox(height: 15),
+                },
+                icon: const Icon(Icons.chat),
+                label: const Text("Chat with Us"),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  backgroundColor: const Color.fromARGB(255, 101, 130, 105),
+                  textStyle: const TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(

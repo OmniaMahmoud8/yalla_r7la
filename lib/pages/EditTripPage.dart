@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:yalla_r7la_new/models/get_destination/get_destination.dart';
 
 class EditTripPage extends StatefulWidget {
-  final Map<String, dynamic> trip;
+  final GetDestination trip;
 
   const EditTripPage({super.key, required this.trip});
 
@@ -21,7 +22,8 @@ class _EditTripPageState extends State<EditTripPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
-  final TextEditingController availableNumberController = TextEditingController();
+  final TextEditingController availableNumberController =
+      TextEditingController();
   final TextEditingController startDateController = TextEditingController();
   final TextEditingController endDateController = TextEditingController();
   final TextEditingController discountController = TextEditingController();
@@ -29,7 +31,9 @@ class _EditTripPageState extends State<EditTripPage> {
 
   List<XFile> imageFiles = [];
 
-  final String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2hhbWVkYXphbHk3NzJAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI4ZTA0OTA5NS01NzY4LTQyN2QtYWNmNy02NjU0ZGMxMmFlMGYiLCJqdGkiOiI4OWE2NzdkMS0yNzBjLTQ1YzItYmIzNC0zMTgwNmJkZTExNWIiLCJVc2VyVHlwZSI6Ik93bmVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiT3duZXIiLCJleHAiOjE3NDkwNzc3OTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDY5NTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTU1In0.lFdnvnr1my2tGWfHQoUEzuNes5KL_KfkRY0HWHPSDgg";
+  final String token =
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2hhbWVkYXphbHk3NzJAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiJjODdjMDU5OS0zNGIxLTQ4NTEtYTdlMy1kYTYyNWEwYzEwODQiLCJqdGkiOiI1MjBiMmI3My1mNDY2LTQ4ZjYtYTJmYi05MGJjZTJmZWQ3ZjkiLCJVc2VyVHlwZSI6Ik93bmVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiT3duZXIiLCJleHAiOjE3NDk5OTY5MDYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDY5NTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTU1In0.nnJ11TzOSCft_Kzw6rCxEZlSc7kA5-OPHZqaxifrX44";
+  // final String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2hhbWVkYXphbHk3NzJAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI4ZTA0OTA5NS01NzY4LTQyN2QtYWNmNy02NjU0ZGMxMmFlMGYiLCJqdGkiOiI4OWE2NzdkMS0yNzBjLTQ1YzItYmIzNC0zMTgwNmJkZTExNWIiLCJVc2VyVHlwZSI6Ik93bmVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiT3duZXIiLCJleHAiOjE3NDkwNzc3OTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDY5NTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTU1In0.lFdnvnr1my2tGWfHQoUEzuNes5KL_KfkRY0HWHPSDgg";
 
   String? selectedCategory;
   final List<String> categories = [
@@ -45,16 +49,18 @@ class _EditTripPageState extends State<EditTripPage> {
   @override
   void initState() {
     super.initState();
-    nameController.text = widget.trip['title'] ?? '';
-    descriptionController.text = widget.trip['description'] ?? '';
-    locationController.text = widget.trip['location'] ?? '';
-    availableNumberController.text = widget.trip['availableNumber']?.toString() ?? '0';
-    startDateController.text = widget.trip['startDate'] ?? '';
-    endDateController.text = widget.trip['endDate'] ?? '';
-    discountController.text = widget.trip['discount']?.toString() ?? '0.0';
-    costController.text = widget.trip['cost']?.toString() ?? '0.0';
-    selectedCategory = widget.trip['category'] ?? categories.first;
-    if (widget.trip['imageData'] != null && (widget.trip['imageData'] as List).isNotEmpty) {
+    nameController.text = widget.trip.name ?? '';
+    descriptionController.text = widget.trip.description ?? '';
+    locationController.text = widget.trip.location ?? '';
+    availableNumberController.text =
+        widget.trip.avilableNumber?.toString() ?? '0';
+    startDateController.text = widget.trip.startDate ?? '';
+    endDateController.text = widget.trip.endtDate ?? '';
+    discountController.text = widget.trip.discount?.toString() ?? '0.0';
+    costController.text = widget.trip.cost?.toString() ?? '0.0';
+    selectedCategory = widget.trip.category ?? categories.first;
+    if (widget.trip.images != null &&
+        (widget.trip.images as List).isNotEmpty) {
       imageFiles = [];
     }
   }
@@ -86,26 +92,30 @@ class _EditTripPageState extends State<EditTripPage> {
   }
 
   Future<void> sendUpdatedTripToServer() async {
-    final uri = Uri.parse('http://20.74.208.111:5260/api/Owners/UpdateDestinationWithImages');
-    final request = http.MultipartRequest('PUT', uri); 
+    final uri = Uri.parse(
+      'http://20.74.208.111:5260/api/Owners/UpdateDestinationWithImages',
+    );
+    final request = http.MultipartRequest('PUT', uri);
 
     request.headers['Authorization'] = token;
     request.headers['accept'] = '*/*';
 
-    request.fields['Id'] = widget.trip['id']?.toString() ?? ''; 
+    request.fields['Id'] = widget.trip.destinationId?.toString() ?? '';
     request.fields['Name'] = nameController.text;
     request.fields['Description'] = descriptionController.text;
     request.fields['Location'] = locationController.text;
     request.fields['Category'] = selectedCategory ?? '';
-    request.fields['AvailableNumber'] = int.parse(availableNumberController.text).toString();
-    request.fields['StartDate'] = startDateController.text.endsWith('Z') 
-        ? startDateController.text 
+    request.fields['AvailableNumber'] = int.parse(
+      availableNumberController.text,
+    ).toString();
+    request.fields['StartDate'] = startDateController.text.endsWith('Z')
+        ? startDateController.text
         : '${startDateController.text}Z';
-    request.fields['EndDate'] = endDateController.text.endsWith('Z') 
-        ? endDateController.text 
+    request.fields['EndDate'] = endDateController.text.endsWith('Z')
+        ? endDateController.text
         : '${endDateController.text}Z';
-    request.fields['Discount'] = (discountController.text.isEmpty 
-        ? '0.0' 
+    request.fields['Discount'] = (discountController.text.isEmpty
+        ? '0.0'
         : double.parse(discountController.text).toString());
     request.fields['Cost'] = double.parse(costController.text).toString();
 
@@ -126,7 +136,7 @@ class _EditTripPageState extends State<EditTripPage> {
     if (response.statusCode == 200 || response.statusCode == 201) {
       final responseData = jsonDecode(responseBody);
       final updatedTrip = {
-        'id': widget.trip['id'], 
+        'id': widget.trip.destinationId,
         'title': nameController.text,
         'description': descriptionController.text,
         'location': locationController.text,
@@ -136,7 +146,8 @@ class _EditTripPageState extends State<EditTripPage> {
         'endDate': endDateController.text,
         'discount': double.tryParse(discountController.text) ?? 0.0,
         'cost': double.tryParse(costController.text) ?? 0.0,
-        'imageData': responseData['imageUrls'] ?? widget.trip['imageData'] ?? [],
+        'imageData':
+            responseData['imageUrls'] ?? widget.trip.images ?? [],
       };
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -145,7 +156,11 @@ class _EditTripPageState extends State<EditTripPage> {
       Navigator.pop(context, updatedTrip);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to update trip. Status: ${response.statusCode}, Body: $responseBody")),
+        SnackBar(
+          content: Text(
+            "Failed to update trip. Status: ${response.statusCode}, Body: $responseBody",
+          ),
+        ),
       );
     }
   }
@@ -170,34 +185,51 @@ class _EditTripPageState extends State<EditTripPage> {
                 buildTextField("Name", nameController),
                 buildTextField("Description", descriptionController),
                 buildTextField("Location", locationController),
-                buildTextField("Available Number", availableNumberController,
-                    keyboardType: TextInputType.number),
-                buildTextField("Cost", costController,
-                    keyboardType: TextInputType.number),
-                buildTextField("Discount", discountController,
-                    keyboardType: TextInputType.number),
+                buildTextField(
+                  "Available Number",
+                  availableNumberController,
+                  keyboardType: TextInputType.number,
+                ),
+                buildTextField(
+                  "Cost",
+                  costController,
+                  keyboardType: TextInputType.number,
+                ),
+                buildTextField(
+                  "Discount",
+                  discountController,
+                  keyboardType: TextInputType.number,
+                ),
                 Row(
                   children: [
                     Expanded(
                       child: GestureDetector(
                         onTap: () => _pickDate(startDateController),
-                        child: buildTextField("Start Date", startDateController,
-                            enabled: false),
+                        child: buildTextField(
+                          "Start Date",
+                          startDateController,
+                          enabled: false,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: GestureDetector(
                         onTap: () => _pickDate(endDateController),
-                        child: buildTextField("End Date", endDateController,
-                            enabled: false),
+                        child: buildTextField(
+                          "End Date",
+                          endDateController,
+                          enabled: false,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text("Category:",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                const Text(
+                  "Category:",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   value: selectedCategory,
@@ -285,8 +317,12 @@ class _EditTripPageState extends State<EditTripPage> {
     );
   }
 
-  Widget buildTextField(String label, TextEditingController controller,
-      {TextInputType keyboardType = TextInputType.text, bool enabled = true}) {
+  Widget buildTextField(
+    String label,
+    TextEditingController controller, {
+    TextInputType keyboardType = TextInputType.text,
+    bool enabled = true,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: TextFormField(
@@ -301,7 +337,9 @@ class _EditTripPageState extends State<EditTripPage> {
           if (value == null || value.isEmpty) {
             return "Please enter $label";
           }
-          if (label == "Available Number" || label == "Cost" || label == "Discount") {
+          if (label == "Available Number" ||
+              label == "Cost" ||
+              label == "Discount") {
             if (double.tryParse(value) == null) {
               return "Please enter a valid number for $label";
             }

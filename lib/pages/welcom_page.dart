@@ -5,7 +5,7 @@ import 'package:yalla_r7la_new/pages/HomePage.dart';
 class welcom_page extends StatelessWidget {
   const welcom_page({super.key, required String email});
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 207, 221, 192),
@@ -17,10 +17,7 @@ class welcom_page extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/group_35.png',
-                height: 300,
-              ),
+              child: Image.asset('assets/images/group_35.png', height: 300),
             ),
             const SizedBox(height: 30),
             const Text(
@@ -39,7 +36,8 @@ class welcom_page extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                   MaterialPageRoute(builder: (context) => const HomePage()),);
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
                 },
                 child: const Text("Explore"),
               ),
@@ -50,4 +48,3 @@ class welcom_page extends StatelessWidget {
     );
   }
 }
-

@@ -12,8 +12,10 @@ class InternetPaymentPage extends StatefulWidget {
 
 class _InternetPaymentPageState extends State<InternetPaymentPage> {
   final TextEditingController _customerIdController = TextEditingController();
-  final TextEditingController _subscriptionCodeController = TextEditingController();
-  final TextEditingController _providerNumberController = TextEditingController();
+  final TextEditingController _subscriptionCodeController =
+      TextEditingController();
+  final TextEditingController _providerNumberController =
+      TextEditingController();
 
   bool get isButtonEnabled =>
       _customerIdController.text.isNotEmpty &&
@@ -40,12 +42,7 @@ class _InternetPaymentPageState extends State<InternetPaymentPage> {
 
   Future<Map<String, dynamic>> fetchPaymentDetails() async {
     await Future.delayed(const Duration(seconds: 1));
-    return {
-      'status': 'active',
-      'fee': 20.0,
-      'tax': 3.5,
-      'provider': 'WE',
-    };
+    return {'status': 'active', 'fee': 20.0, 'tax': 3.5, 'provider': 'WE'};
   }
 
   @override

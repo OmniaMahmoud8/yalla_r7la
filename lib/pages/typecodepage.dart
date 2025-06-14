@@ -51,52 +51,60 @@ class _TypeCodePageState extends State<TypeCodePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Enter the code 🔑", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const Text(
+              "Enter the code 🔑",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 20),
-            
-          Row(
-  children: [
-    Expanded(
-      flex: 3,
-      child: SizedBox(
-        height: 48,
-        width: 200, 
-        child: TextField(
-          controller: codeController,
-          decoration: const InputDecoration(
-            labelText: "Code",
-            border: OutlineInputBorder(),
-          ),
-          keyboardType: TextInputType.number,
-        ),
-      ),
-    ),
-    SizedBox(width: 16), 
-    SizedBox(
-      width: 100,
-      height: 48, 
-      child: ElevatedButton(
-        onPressed: resendCode,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 101, 130, 105),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        child: const Text("Resend", style: TextStyle(color: Colors.white)),
-      ),
-    ),
-  ],
-),
 
-            
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: SizedBox(
+                    height: 48,
+                    width: 200,
+                    child: TextField(
+                      controller: codeController,
+                      decoration: const InputDecoration(
+                        labelText: "Code",
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 16),
+                SizedBox(
+                  width: 100,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: resendCode,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 101, 130, 105),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      "Resend",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
             const SizedBox(height: 20),
             const Text(
               "We’ve sent the verification code to the email you entered:",
               style: TextStyle(fontSize: 13, color: Colors.black54),
             ),
             const SizedBox(height: 4),
-            Text(widget.email, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            Text(
+              widget.email,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
 
             const SizedBox(height: 30),
             SizedBox(
@@ -108,22 +116,31 @@ class _TypeCodePageState extends State<TypeCodePage> {
                         if (codeController.text.trim() == generatedCode) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
+                            MaterialPageRoute(
+                              builder: (context) => const ChangePasswordPage(),
+                            ),
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("The entered code is incorrect.")),
+                            const SnackBar(
+                              content: Text("The entered code is incorrect."),
+                            ),
                           );
                         }
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 101, 130, 105),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-                child: const Text("Change Password", style: TextStyle(color: Colors.white)),
+                child: const Text(
+                  "Change Password",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

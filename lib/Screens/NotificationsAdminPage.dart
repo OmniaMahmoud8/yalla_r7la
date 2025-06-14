@@ -55,7 +55,8 @@ class NotificationsPage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => const TripDetailsAdminPage(trip: {}),
+                                    builder: (_) =>
+                                        const TripDetailsAdminPage(trip: {}),
                                   ),
                                 );
                               },
@@ -65,21 +66,36 @@ class NotificationsPage extends StatelessWidget {
                             Row(
                               children: [
                                 IconButton(
-                                  icon: const Icon(Icons.check_circle, color:   const Color.fromARGB(255, 101, 130, 105)),
+                                  icon: const Icon(
+                                    Icons.check_circle,
+                                    color: const Color.fromARGB(
+                                      255,
+                                      101,
+                                      130,
+                                      105,
+                                    ),
+                                  ),
                                   onPressed: () {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text("${notification['title']} accepted ✅"),
+                                        content: Text(
+                                          "${notification['title']} accepted ✅",
+                                        ),
                                       ),
                                     );
                                   },
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.cancel, color: Color.fromARGB(255, 246, 84, 73)),
+                                  icon: const Icon(
+                                    Icons.cancel,
+                                    color: Color.fromARGB(255, 246, 84, 73),
+                                  ),
                                   onPressed: () {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text("${notification['title']} rejected ❌"),
+                                        content: Text(
+                                          "${notification['title']} rejected ❌",
+                                        ),
                                       ),
                                     );
                                   },

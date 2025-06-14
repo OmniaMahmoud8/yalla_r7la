@@ -23,8 +23,8 @@ class AppRouter {
             name: args['name'] ?? '',
             email: args['email'] ?? '',
             phone: args['phone'] ?? '',
-            birthDate: '', 
-            profilePicture: '', 
+            birthDate: '',
+            profilePicture: '',
             gender: '',
           ),
         );
@@ -38,16 +38,15 @@ class AppRouter {
             firstName: '',
             lastName: '',
             userName: '',
-            birthDate: '', 
+            birthDate: '',
             gender: '',
           ),
         );
 
       default:
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('No route defined')),
-          ),
+          builder: (_) =>
+              const Scaffold(body: Center(child: Text('No route defined'))),
         );
     }
   }

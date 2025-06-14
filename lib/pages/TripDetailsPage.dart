@@ -1,27 +1,28 @@
 // pages/TripDetailsPage.dart
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:yalla_r7la_new/models/get_destination/get_destination.dart';
 import 'EditTripPage.dart';
 import 'Transaction.dart';
 
 class TripDetailsPage extends StatelessWidget {
-  final Map<String, dynamic> trip;
+  final GetDestination trip;
 
   const TripDetailsPage({super.key, required this.trip});
 
   @override
   Widget build(BuildContext context) {
-    final String title = trip['title'] ?? 'No Title';
-    final String description = trip['description'] ?? 'No Description';
-    final String location = trip['location'] ?? 'No Location';
-    final String category = trip['category'] ?? 'No Category';
-    final int availableNumber = trip['availableNumber'] ?? 0;
-    final String startDate = trip['startDate'] ?? 'No Start Date';
-    final String endDate = trip['endDate'] ?? 'No End Date';
-    final double discount = (trip['discount'] ?? 0.0).toDouble();
-    final double cost = (trip['cost'] ?? 0.0).toDouble();
-    final List<String> imageData = trip['imageData'] != null
-        ? List<String>.from(trip['imageData'])
+    final String title = trip.name ?? 'No Title';
+    final String description = trip.description ?? 'No Description';
+    final String location = trip.location ?? 'No Location';
+    final String category = trip.category ?? 'No Category';
+    final int availableNumber = trip.avilableNumber ?? 0;
+    final String startDate = trip.startDate ?? 'No Start Date';
+    final String endDate = trip.endtDate ?? 'No End Date';
+    final double discount = (trip.discount ?? 0.0).toDouble();
+    final double cost = (trip.cost ?? 0.0).toDouble();
+    final List<String> imageData = trip.images != null
+        ? trip.images!.map((e)=>e.imagePath??'').toList()
         : [];
 
     return Scaffold(
@@ -65,8 +66,9 @@ class TripDetailsPage extends StatelessWidget {
                 context: context,
                 builder: (ctx) => AlertDialog(
                   title: const Text("Confirm Delete"),
-                  content:
-                      const Text("Are you sure you want to delete this trip?"),
+                  content: const Text(
+                    "Are you sure you want to delete this trip?",
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(ctx),
@@ -165,9 +167,7 @@ class TripDetailsPage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const TransactionsPage(),
-            ),
+            MaterialPageRoute(builder: (context) => const TransactionsPage()),
           );
         },
         icon: const Icon(

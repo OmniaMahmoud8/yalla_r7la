@@ -54,7 +54,11 @@ class PersonalInformationPage extends StatelessWidget {
                         ? FileImage(File(imagePath!))
                         : null,
                     child: imagePath == null
-                        ? const Icon(Icons.person, size: 70, color: Colors.white)
+                        ? const Icon(
+                            Icons.person,
+                            size: 70,
+                            color: Colors.white,
+                          )
                         : null,
                   ),
                   Positioned(
@@ -62,38 +66,37 @@ class PersonalInformationPage extends StatelessWidget {
                     right: 5,
                     child: InkWell(
                       onTap: () {
-                      Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (_) => EditInformationPage(
-      email: email,
-      phone: phone,
-      birthDate: birthDate,
-      gender: gender,
-      profilePicture: '',
-      name: '$firstName $lastName',
-    ),
-  ),
-).then((result) {
-  if (result != null) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => PersonalInformationPage(
-          email: result['email'],
-          phone: result['phone'],
-          birthDate: result['birthDate'],
-          gender: result['gender'],
-          imagePath: result['imagePath'],
-          firstName: result['firstName'],
-          lastName: result['lastName'],
-          userName: result['userName'],
-        ),
-      ),
-    );
-  }
-});
-
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => EditInformationPage(
+                              email: email,
+                              phone: phone,
+                              birthDate: birthDate,
+                              gender: gender,
+                              profilePicture: '',
+                              name: '$firstName $lastName',
+                            ),
+                          ),
+                        ).then((result) {
+                          if (result != null) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => PersonalInformationPage(
+                                  email: result['email'],
+                                  phone: result['phone'],
+                                  birthDate: result['birthDate'],
+                                  gender: result['gender'],
+                                  imagePath: result['imagePath'],
+                                  firstName: result['firstName'],
+                                  lastName: result['lastName'],
+                                  userName: result['userName'],
+                                ),
+                              ),
+                            );
+                          }
+                        });
                       },
                       child: const CircleAvatar(
                         backgroundColor: Color.fromARGB(255, 207, 221, 192),

@@ -22,7 +22,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
       "time": "10:00 AM",
       "user": "Ahmed",
       "status": "accepted",
-      "details": "A day trip to visit the pyramids and the Egyptian Museum."
+      "details": "A day trip to visit the pyramids and the Egyptian Museum.",
     },
     {
       "id": 2,
@@ -31,7 +31,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
       "time": "09:00 AM",
       "user": "Sarah",
       "status": "accepted",
-      "details": "A seaside escape with seafood lunch and Corniche walk."
+      "details": "A seaside escape with seafood lunch and Corniche walk.",
     },
   ];
 
@@ -53,16 +53,15 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
         MaterialPageRoute(builder: (_) => const NotificationsPage()),
       );
     } else if (index == 3) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => ChatsPage()),
-      );
+      Navigator.push(context, MaterialPageRoute(builder: (_) => ChatsPage()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final acceptedTrips = trips.where((trip) => trip['status'] == 'accepted').toList();
+    final acceptedTrips = trips
+        .where((trip) => trip['status'] == 'accepted')
+        .toList();
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 207, 221, 192),
@@ -79,14 +78,18 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
           children: [
             const SizedBox.shrink(),
             ListTile(
-              leading: const Icon(Icons.person,color: Color.fromARGB(255, 101, 130, 105),),
+              leading: const Icon(
+                Icons.person,
+                color: Color.fromARGB(255, 101, 130, 105),
+              ),
               title: const Text('Profile'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const Profile_Admin_Page(email: '', fullName: ''),
+                    builder: (_) =>
+                        const Profile_Admin_Page(email: '', fullName: ''),
                   ),
                 );
               },
@@ -97,10 +100,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
       appBar: AppBar(
         title: const Text(
           "Welcome!",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 101, 130, 105),
         elevation: 6,
@@ -123,7 +123,9 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
 
                 return Card(
                   elevation: 3,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   margin: const EdgeInsets.only(bottom: 16),
                   child: ListTile(
                     title: Text(
@@ -147,25 +149,27 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onBottomNavTapped,
-        selectedItemColor:const Color.fromARGB(255, 101, 130, 105),
+        selectedItemColor: const Color.fromARGB(255, 101, 130, 105),
         unselectedItemColor: Colors.grey[300],
-        backgroundColor:const Color.fromARGB(255, 101, 130, 105),
+        backgroundColor: const Color.fromARGB(255, 101, 130, 105),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home,color: Color.fromARGB(255, 101, 130, 105)),
+            icon: Icon(Icons.home, color: Color.fromARGB(255, 101, 130, 105)),
             label: "Home",
-            
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person,color: Color.fromARGB(255, 101, 130, 105)),
+            icon: Icon(Icons.person, color: Color.fromARGB(255, 101, 130, 105)),
             label: "Profile",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications,color:  Color.fromARGB(255, 101, 130, 105)),
+            icon: Icon(
+              Icons.notifications,
+              color: Color.fromARGB(255, 101, 130, 105),
+            ),
             label: "Notifications",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat,color: Color.fromARGB(255, 101, 130, 105)),
+            icon: Icon(Icons.chat, color: Color.fromARGB(255, 101, 130, 105)),
             label: "Chat",
           ),
         ],

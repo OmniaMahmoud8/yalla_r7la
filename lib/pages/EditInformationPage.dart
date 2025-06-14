@@ -6,9 +6,16 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class EditInformationPage extends StatefulWidget {
-  const EditInformationPage({super.key, required String name, required String email, required String phone, required String birthDate, required String gender, required String profilePicture});
+  const EditInformationPage({
+    super.key,
+    required String name,
+    required String email,
+    required String phone,
+    required String birthDate,
+    required String gender,
+    required String profilePicture,
+  });
 
   @override
   State<EditInformationPage> createState() => _EditInformationPageState();
@@ -31,7 +38,7 @@ class _EditInformationPageState extends State<EditInformationPage> {
   Future<void> _showImagePickerOptions() async {
     showModalBottomSheet(
       context: context,
-      backgroundColor:const Color.fromARGB(255, 207, 221, 192),
+      backgroundColor: const Color.fromARGB(255, 207, 221, 192),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -80,7 +87,9 @@ class _EditInformationPageState extends State<EditInformationPage> {
   }
 
   bool _isEmailValid(String email) {
-    RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+    RegExp emailRegExp = RegExp(
+      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+    );
     return emailRegExp.hasMatch(email);
   }
 
@@ -96,7 +105,10 @@ class _EditInformationPageState extends State<EditInformationPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: const BackButton(color: Colors.black),
-        title: const Text('Edit Information', style: TextStyle(color: Colors.black)),
+        title: const Text(
+          'Edit Information',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -115,9 +127,15 @@ class _EditInformationPageState extends State<EditInformationPage> {
                   CircleAvatar(
                     radius: 70,
                     backgroundColor: Colors.grey[300],
-                    backgroundImage: _imageFile != null ? FileImage(_imageFile!) : null,
+                    backgroundImage: _imageFile != null
+                        ? FileImage(_imageFile!)
+                        : null,
                     child: _imageFile == null
-                        ? const Icon(Icons.person, size: 70, color: Colors.white)
+                        ? const Icon(
+                            Icons.person,
+                            size: 70,
+                            color: Colors.white,
+                          )
                         : null,
                   ),
                   Positioned(
@@ -126,7 +144,7 @@ class _EditInformationPageState extends State<EditInformationPage> {
                     child: InkWell(
                       onTap: _showImagePickerOptions,
                       child: const CircleAvatar(
-                        backgroundColor:  Color.fromARGB(255, 101, 130, 105),
+                        backgroundColor: Color.fromARGB(255, 101, 130, 105),
                         radius: 20,
                         child: Icon(Icons.add, color: Colors.white),
                       ),
@@ -141,15 +159,26 @@ class _EditInformationPageState extends State<EditInformationPage> {
               const SizedBox(height: 10),
               _buildTextField("User Name", userNameController),
               const SizedBox(height: 10),
-              _buildTextField("Email", emailController, keyboardType: TextInputType.emailAddress, validator: (value) {
-                if (!_isEmailValid(value!)) return "Enter a valid email";
-                return null;
-              }),
+              _buildTextField(
+                "Email",
+                emailController,
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (!_isEmailValid(value!)) return "Enter a valid email";
+                  return null;
+                },
+              ),
               const SizedBox(height: 10),
-              _buildTextField("Phone Number", phoneController, keyboardType: TextInputType.phone, validator: (value) {
-                if (!_isPhoneValid(value!)) return "Phone must start with '+'";
-                return null;
-              }),
+              _buildTextField(
+                "Phone Number",
+                phoneController,
+                keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (!_isPhoneValid(value!))
+                    return "Phone must start with '+'";
+                  return null;
+                },
+              ),
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -157,7 +186,10 @@ class _EditInformationPageState extends State<EditInformationPage> {
                     child: GestureDetector(
                       onTap: () => _pickDate(birthDateController),
                       child: AbsorbPointer(
-                        child: _buildTextField("Birth Date", birthDateController),
+                        child: _buildTextField(
+                          "Birth Date",
+                          birthDateController,
+                        ),
                       ),
                     ),
                   ),
@@ -170,79 +202,90 @@ class _EditInformationPageState extends State<EditInformationPage> {
                   labelText: "Gender",
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 items: const [
                   DropdownMenuItem(value: "Male", child: Text("Male")),
                   DropdownMenuItem(value: "Female", child: Text("Female")),
                 ],
                 onChanged: (value) => setState(() => selectedGender = value),
-                validator: (value) => value == null ? "Please select gender" : null,
+                validator: (value) =>
+                    value == null ? "Please select gender" : null,
               ),
               const SizedBox(height: 20),
-            const SizedBox(height: 30),
-ElevatedButton(
-  style: ElevatedButton.styleFrom(
-    backgroundColor: const Color.fromARGB(255, 101, 130, 105),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
-    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-  ),
-  onPressed: () async {
-    if (_formKey.currentState!.validate()) {
-      // اجمع البيانات
-      String firstName = firstNameController.text;
-      String lastName = lastNameController.text;
-      String userName = userNameController.text;
-      String email = emailController.text;
-      String phone = phoneController.text;
-      String birthDate = birthDateController.text;
-      String gender = selectedGender ?? '';
+              const SizedBox(height: 30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 101, 130, 105),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 15,
+                  ),
+                ),
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    // اجمع البيانات
+                    String firstName = firstNameController.text;
+                    String lastName = lastNameController.text;
+                    String userName = userNameController.text;
+                    String email = emailController.text;
+                    String phone = phoneController.text;
+                    String birthDate = birthDateController.text;
+                    String gender = selectedGender ?? '';
 
-      try {
-        var response = await http.post(
-          Uri.parse('http://192.168.43.191:5260/api/Owners'),
-          headers: {'Content-Type': 'application/json'},
-          body: jsonEncode({
-            "name": "$firstName $lastName",
-            "description": userName,
-            "location": phone,
-            "category": gender,
-            "avilableNumber": 0,
-            "startDate": birthDate,
-            "endtDate": birthDate,
-            "cost": 0,
-            "discount": 0
-          }),
-        );
+                    try {
+                      var response = await http.post(
+                        Uri.parse('http://192.168.43.191:5260/api/Owners'),
+                        headers: {'Content-Type': 'application/json'},
+                        body: jsonEncode({
+                          "name": "$firstName $lastName",
+                          "description": userName,
+                          "location": phone,
+                          "category": gender,
+                          "avilableNumber": 0,
+                          "startDate": birthDate,
+                          "endtDate": birthDate,
+                          "cost": 0,
+                          "discount": 0,
+                        }),
+                      );
 
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          Navigator.pop(context, {
-            "firstName": firstName,
-            "lastName": lastName,
-            "userName": userName,
-            "email": email,
-            "phone": phone,
-            "birthDate": birthDate,
-            "gender": gender,
-            "imagePath": _imageFile?.path
-          });
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to send data to server')),
-          );
-        }
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
-      }
-    }
-  },
-  child: const Text("Done", style: TextStyle(color: Colors.white, fontSize: 18)),
-),
-
+                      if (response.statusCode == 200 ||
+                          response.statusCode == 201) {
+                        Navigator.pop(context, {
+                          "firstName": firstName,
+                          "lastName": lastName,
+                          "userName": userName,
+                          "email": email,
+                          "phone": phone,
+                          "birthDate": birthDate,
+                          "gender": gender,
+                          "imagePath": _imageFile?.path,
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Failed to send data to server'),
+                          ),
+                        );
+                      }
+                    } catch (e) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                    }
+                  }
+                },
+                child: const Text(
+                  "Done",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),
             ],
           ),
         ),

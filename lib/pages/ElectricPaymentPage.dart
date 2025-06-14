@@ -28,9 +28,7 @@ class ElectricPaymentPage extends StatelessWidget {
     final total = internetFee + tax;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Electric Payment"),
-      ),
+      appBar: AppBar(title: const Text("Electric Payment")),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -51,37 +49,31 @@ class ElectricPaymentPage extends StatelessWidget {
                 color: Colors.red,
               ),
             ),
-            const Spacer(), 
+            const Spacer(),
 
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                   MaterialPageRoute(builder: (context) => const HomePage()),);
-                },
-                child: const Text("Done"),
-              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
+              },
+              child: const Text("Done"),
+            ),
           ],
         ),
       ),
     );
   }
+
   Widget _buildRow(String label, String value, {TextStyle? style}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            value,
-            style: style,
-          ),
+          Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(value, style: style),
         ],
       ),
     );

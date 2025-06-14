@@ -25,17 +25,14 @@ class Error404page extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/group_38.png',
-                height: 200,
-              ),
+              Image.asset('assets/images/group_38.png', height: 200),
               const SizedBox(height: 30),
               const Text(
                 "ERORR 404 \n page not found",
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
-                  color:  Color.fromARGB(255, 139, 47, 47),
+                  color: Color.fromARGB(255, 139, 47, 47),
                 ),
                 textAlign: TextAlign.center,
               ),

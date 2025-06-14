@@ -13,7 +13,7 @@ class AddEditOwnerPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add/Edit Owner"),
-        backgroundColor:  const Color.fromARGB(255, 207, 221, 192),
+        backgroundColor: const Color.fromARGB(255, 207, 221, 192),
         foregroundColor: Colors.black,
         elevation: 0,
         leading: BackButton(),
@@ -53,8 +53,7 @@ class AddEditOwnerPage extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 207, 221, 192),
                   shape: RoundedRectangleBorder(
@@ -63,7 +62,7 @@ class AddEditOwnerPage extends StatelessWidget {
                 ),
                 child: const Text("Add"),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -39,7 +39,11 @@ class TripDetailInfo extends StatelessWidget {
               color: Colors.grey[300],
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Icon(Icons.image_not_supported, size: 80, color: Colors.grey),
+            child: const Icon(
+              Icons.image_not_supported,
+              size: 80,
+              color: Colors.grey,
+            ),
           ),
         const SizedBox(height: 20),
         Text("Destination: $destination", style: const TextStyle(fontSize: 18)),

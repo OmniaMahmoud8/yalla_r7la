@@ -9,7 +9,7 @@ class OwnerDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Owner Details"),
-        backgroundColor:  const Color.fromARGB(255, 207, 221, 192),
+        backgroundColor: const Color.fromARGB(255, 207, 221, 192),
         foregroundColor: Colors.black,
         elevation: 0,
         leading: BackButton(),
@@ -18,10 +18,7 @@ class OwnerDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const CircleAvatar(
-              radius: 40,
-              child: Icon(Icons.person, size: 50),
-            ),
+            const CircleAvatar(radius: 40, child: Icon(Icons.person, size: 50)),
             const SizedBox(height: 10),
             const Text("User No.#", style: TextStyle(fontSize: 20)),
             const SizedBox(height: 10),

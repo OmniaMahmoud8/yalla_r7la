@@ -17,14 +17,14 @@ class _SelectLocationPageState extends State<SelectLocationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Select Location"),
-        backgroundColor:const Color.fromARGB(255, 101, 130, 105),
+        backgroundColor: const Color.fromARGB(255, 101, 130, 105),
         foregroundColor: Colors.white,
       ),
       body: Stack(
         children: [
           GoogleMap(
             initialCameraPosition: const CameraPosition(
-              target: LatLng(30.033333, 31.233334), 
+              target: LatLng(30.033333, 31.233334),
               zoom: 10,
             ),
             onTap: (LatLng position) {
@@ -37,7 +37,7 @@ class _SelectLocationPageState extends State<SelectLocationPage> {
                     Marker(
                       markerId: const MarkerId("selected-location"),
                       position: selectedLocation!,
-                    )
+                    ),
                   }
                 : {},
           ),

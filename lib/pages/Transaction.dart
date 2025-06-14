@@ -27,24 +27,39 @@ class _TransactionsPageState extends State<TransactionsPage> {
     fetchTransactions();
   }
 
-  // مؤقتًا 
+  // مؤقتًا
   Future<void> fetchTransactions() async {
     List<Transaction> fetched = [
-      Transaction(name: "Ahmed Mohamed", amount: 250.0, time: DateTime.now().subtract(const Duration(minutes: 10))),
-      Transaction(name: "Sara Ali", amount: 150.0, time: DateTime.now().subtract(const Duration(hours: 1))),
-      Transaction(name: "Mona Sameh", amount: 300.0, time: DateTime.now().subtract(const Duration(hours: 3))),
+      Transaction(
+        name: "Ahmed Mohamed",
+        amount: 250.0,
+        time: DateTime.now().subtract(const Duration(minutes: 10)),
+      ),
+      Transaction(
+        name: "Sara Ali",
+        amount: 150.0,
+        time: DateTime.now().subtract(const Duration(hours: 1)),
+      ),
+      Transaction(
+        name: "Mona Sameh",
+        amount: 300.0,
+        time: DateTime.now().subtract(const Duration(hours: 3)),
+      ),
     ];
 
     setState(() {
       _transactions = fetched;
     });
   }
+
   void _sortTransactions() {
     setState(() {
       _sortNewestFirst = !_sortNewestFirst;
-      _transactions.sort((a, b) => _sortNewestFirst
-          ? b.time.compareTo(a.time)
-          : a.time.compareTo(b.time));
+      _transactions.sort(
+        (a, b) => _sortNewestFirst
+            ? b.time.compareTo(a.time)
+            : a.time.compareTo(b.time),
+      );
     });
   }
 
@@ -58,7 +73,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
             icon: Icon(
               _sortNewestFirst ? Icons.arrow_downward : Icons.arrow_upward,
             ),
-            tooltip: _sortNewestFirst ? "Sort: Newest First" : "Sort: Oldest First",
+            tooltip: _sortNewestFirst
+                ? "Sort: Newest First"
+                : "Sort: Oldest First",
             onPressed: _sortTransactions,
           ),
         ],
@@ -77,7 +94,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
                   ),
                   elevation: 4,
                   child: ListTile(
-                    leading: const Icon(Icons.person, color: Color.fromARGB(255, 101, 130, 105)),
+                    leading: const Icon(
+                      Icons.person,
+                      color: Color.fromARGB(255, 101, 130, 105),
+                    ),
                     title: Text(transaction.name),
                     subtitle: Text(
                       'Amount: ${transaction.amount.toStringAsFixed(2)} EGP\nTime: ${transaction.time.hour}:${transaction.time.minute.toString().padLeft(2, '0')}',

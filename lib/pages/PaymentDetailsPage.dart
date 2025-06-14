@@ -31,10 +31,7 @@ class PaymentDetailsPage extends StatelessWidget {
     final double total = fee + tax;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Details"),
-        leading: const BackButton(),
-      ),
+      appBar: AppBar(title: const Text("Details"), leading: const BackButton()),
       body: ListView(
         padding: const EdgeInsets.all(24.0),
         children: [
@@ -53,9 +50,7 @@ class PaymentDetailsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ChooseCardPage(), 
-                ),
+                MaterialPageRoute(builder: (context) => const ChooseCardPage()),
               );
             },
             child: const Text("Confirm Payment"),
@@ -78,5 +73,3 @@ class PaymentDetailsPage extends StatelessWidget {
     );
   }
 }
-
-

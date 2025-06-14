@@ -12,7 +12,7 @@ class OwnersListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Owners List"),
-        backgroundColor:  const Color.fromARGB(255, 207, 221, 192),
+        backgroundColor: const Color.fromARGB(255, 207, 221, 192),
         foregroundColor: Colors.black,
         elevation: 0,
       ),

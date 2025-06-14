@@ -37,7 +37,7 @@ class CardDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Card Details"),
-        backgroundColor:  const Color.fromARGB(255, 101, 130, 105),
+        backgroundColor: const Color.fromARGB(255, 101, 130, 105),
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -48,11 +48,16 @@ class CardDetailsPage extends StatelessWidget {
           itemBuilder: (context, index) {
             final card = userCards[index];
             return Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
               elevation: 5,
               margin: const EdgeInsets.symmetric(vertical: 10),
               child: ListTile(
-                leading: const Icon(Icons.credit_card, color:  Color.fromARGB(255, 101, 130, 105)),
+                leading: const Icon(
+                  Icons.credit_card,
+                  color: Color.fromARGB(255, 101, 130, 105),
+                ),
                 title: Text("Card Type: ${card['type']}"),
                 subtitle: Text("Card Holder: ${card['holder']}"),
                 trailing: const Icon(Icons.arrow_forward_ios),

@@ -45,12 +45,14 @@ class PaymentChartPage extends StatelessWidget {
                     touchTooltipData: LineTouchTooltipData(
                       tooltipBgColor: Colors.black87,
                       tooltipRoundedRadius: 8,
-                      getTooltipItems: (spots) => spots.map(
-                        (e) => LineTooltipItem(
-                          "\$${e.y.toStringAsFixed(2)}",
-                          const TextStyle(color: Colors.white),
-                        ),
-                      ).toList(),
+                      getTooltipItems: (spots) => spots
+                          .map(
+                            (e) => LineTooltipItem(
+                              "\$${e.y.toStringAsFixed(2)}",
+                              const TextStyle(color: Colors.white),
+                            ),
+                          )
+                          .toList(),
                     ),
                     handleBuiltInTouches: true,
                   ),
@@ -61,13 +63,24 @@ class PaymentChartPage extends StatelessWidget {
                         showTitles: true,
                         interval: 1,
                         getTitlesWidget: (value, _) {
-                          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+                          const months = [
+                            'Jan',
+                            'Feb',
+                            'Mar',
+                            'Apr',
+                            'May',
+                            'Jun',
+                            'Jul',
+                          ];
                           if (value >= 0 && value < months.length) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 8),
                               child: Text(
                                 months[value.toInt()],
-                                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             );
                           }
@@ -87,8 +100,12 @@ class PaymentChartPage extends StatelessWidget {
                         reservedSize: 40,
                       ),
                     ),
-                    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles: AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    rightTitles: AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
                   ),
                   borderData: FlBorderData(show: false),
                   lineBarsData: [
@@ -101,7 +118,7 @@ class PaymentChartPage extends StatelessWidget {
                       dotData: const FlDotData(show: false),
                       belowBarData: BarAreaData(
                         show: true,
-                        color:const Color.fromARGB(255, 101, 130, 105),
+                        color: const Color.fromARGB(255, 101, 130, 105),
                       ),
                     ),
                   ],
@@ -121,10 +138,12 @@ class PaymentChartPage extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () {
                   Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const TripChartPage()),
-                  );  
-                  },
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TripChartPage(),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.swap_horiz),
                 label: const Text("Swap View"),
                 style: ElevatedButton.styleFrom(

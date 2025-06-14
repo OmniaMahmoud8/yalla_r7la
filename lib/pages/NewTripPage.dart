@@ -32,7 +32,9 @@ class _NewTripPageState extends State<NewTripPage> {
   List<XFile> imageFiles = [];
 
   final String token =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2hhbWVkYXphbHk3NzJAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI4ZTA0OTA5NS01NzY4LTQyN2QtYWNmNy02NjU0ZGMxMmFlMGYiLCJqdGkiOiIyMmZkZGY3Mi04ODczLTRjNzEtYjAwMi0wZmNmZjRkYTg1MWEiLCJVc2VyVHlwZSI6Ik93bmVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiT3duZXIiLCJleHAiOjE3NDkzOTg2NzUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDY5NTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTU1In0._8aSMXMaFmrw5wU1SjY2ybGnnqNA0znKNEe0_p9-xmc";
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2hhbWVkYXphbHk3NzJAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiJjODdjMDU5OS0zNGIxLTQ4NTEtYTdlMy1kYTYyNWEwYzEwODQiLCJqdGkiOiI1MjBiMmI3My1mNDY2LTQ4ZjYtYTJmYi05MGJjZTJmZWQ3ZjkiLCJVc2VyVHlwZSI6Ik93bmVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiT3duZXIiLCJleHAiOjE3NDk5OTY5MDYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDY5NTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTU1In0.nnJ11TzOSCft_Kzw6rCxEZlSc7kA5-OPHZqaxifrX44";
+  // final String token =
+  //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2hhbWVkYXphbHk3NzJAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI4ZTA0OTA5NS01NzY4LTQyN2QtYWNmNy02NjU0ZGMxMmFlMGYiLCJqdGkiOiIyMmZkZGY3Mi04ODczLTRjNzEtYjAwMi0wZmNmZjRkYTg1MWEiLCJVc2VyVHlwZSI6Ik93bmVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiT3duZXIiLCJleHAiOjE3NDkzOTg2NzUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDY5NTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTU1In0._8aSMXMaFmrw5wU1SjY2ybGnnqNA0znKNEe0_p9-xmc";
 
   String? selectedCategory;
   final List<String> categories = [
@@ -72,10 +74,10 @@ class _NewTripPageState extends State<NewTripPage> {
   Future<void> sendTripToServer() async {
     List<MultipartFile> images = [];
     List<File> fileImages = [];
-   
+
     for (var xfile in imageFiles) {
       images.add(
-         MultipartFile.fromFileSync(
+        MultipartFile.fromFileSync(
           xfile.path,
           filename: xfile.path.split('/').last,
         ),
@@ -106,7 +108,7 @@ class _NewTripPageState extends State<NewTripPage> {
     );
     log(model.toJsonFields().toString());
 
-   await ApiService(dio: Dio())
+    await ApiService(dio: Dio())
         .postWithTokenForm(
           endPoint: UrlManager().addDestinationWithImages,
           token: token,

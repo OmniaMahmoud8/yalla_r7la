@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yalla_r7la_new/pages/ElectricPaymentPage.dart';
 
 class PaymentHistoryPage extends StatelessWidget {
-   PaymentHistoryPage({super.key});
+  PaymentHistoryPage({super.key});
 
   // مؤقتا
   final List<Map<String, dynamic>> paymentHistory = [
@@ -46,10 +46,10 @@ class PaymentHistoryPage extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (_) => ElectricPaymentPage(
                             name: payment['company'] ?? '',
-                            cardNumber: '**** **** **** 1122', 
+                            cardNumber: '**** **** **** 1122',
                             provider: payment['company'] ?? '',
                             internetFee: payment['amount'] ?? 0.0,
-                            tax: 0.0, 
+                            tax: 0.0,
                           ),
                         ),
                       );
@@ -88,7 +88,7 @@ class PaymentHistoryPage extends StatelessWidget {
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color:  Color.fromARGB(255, 101, 130, 105),
+                                    color: Color.fromARGB(255, 101, 130, 105),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -99,7 +99,12 @@ class PaymentHistoryPage extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: payment['isPaid'] == true
-                                        ? const Color.fromARGB(255, 101, 130, 105)
+                                        ? const Color.fromARGB(
+                                            255,
+                                            101,
+                                            130,
+                                            105,
+                                          )
                                         : Colors.red,
                                   ),
                                 ),

@@ -1,6 +1,6 @@
 // pages/onboardingScreen3.dart
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la_new/Screens/RoleSelectionPage.dart'; 
+import 'package:yalla_r7la_new/Screens/RoleSelectionPage.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   const OnboardingScreen3({super.key});
@@ -13,14 +13,11 @@ class OnboardingScreen3 extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start, 
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
               alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/group_34.png',
-                height: 300,
-              ),
+              child: Image.asset('assets/images/group_34.png', height: 300),
             ),
             const SizedBox(height: 30),
             const Text(
@@ -39,7 +36,9 @@ class OnboardingScreen3 extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const RoleSelectionPage()),
+                    MaterialPageRoute(
+                      builder: (context) => const RoleSelectionPage(),
+                    ),
                   );
                 },
                 child: const Text("Get Started"),

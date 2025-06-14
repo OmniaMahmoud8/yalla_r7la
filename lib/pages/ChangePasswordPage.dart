@@ -15,9 +15,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   bool _isNewPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
-  final TextEditingController currentPasswordController = TextEditingController();
+  final TextEditingController currentPasswordController =
+      TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text("Change Password", style: TextStyle(color: Colors.black)),
+        title: const Text(
+          "Change Password",
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
       ),
       backgroundColor: const Color.fromARGB(255, 207, 221, 192),
@@ -114,26 +119,34 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       newPasswordController.text.isEmpty ||
                       confirmPasswordController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("All fields must be filled")),
+                      const SnackBar(
+                        content: Text("All fields must be filled"),
+                      ),
                     );
-                  } else if (newPasswordController.text != confirmPasswordController.text) {
+                  } else if (newPasswordController.text !=
+                      confirmPasswordController.text) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Passwords do not match")),
                     );
                   } else {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SuccessPage()),
+                      MaterialPageRoute(
+                        builder: (context) => const SuccessPage(),
+                      ),
                     );
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:  const Color.fromARGB(255, 101, 130, 105),
+                  backgroundColor: const Color.fromARGB(255, 101, 130, 105),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text("Change Password", style: TextStyle(color: Colors.white)),
+                child: const Text(
+                  "Change Password",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

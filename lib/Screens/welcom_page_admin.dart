@@ -18,10 +18,7 @@ class welcom_page_Adimn extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/group_35.png',
-                height: 300,
-              ),
+              child: Image.asset('assets/images/group_35.png', height: 300),
             ),
             const SizedBox(height: 30),
             const Text(
@@ -40,7 +37,10 @@ class welcom_page_Adimn extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                   MaterialPageRoute(builder: (context) => const HomeAdminPage()),);
+                    MaterialPageRoute(
+                      builder: (context) => const HomeAdminPage(),
+                    ),
+                  );
                 },
                 child: const Text("Explore"),
               ),
@@ -51,4 +51,3 @@ class welcom_page_Adimn extends StatelessWidget {
     );
   }
 }
-

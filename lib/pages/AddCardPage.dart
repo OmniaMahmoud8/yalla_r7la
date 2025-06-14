@@ -1,7 +1,7 @@
 // pages/AddCardPage.dart
 import 'package:flutter/material.dart';
 import 'package:yalla_r7la_new/pages/InternetPaymentPage.dart';
-import 'package:yalla_r7la_new/pages/HomePage.dart'; 
+import 'package:yalla_r7la_new/pages/HomePage.dart';
 
 class AddCardPage extends StatelessWidget {
   const AddCardPage({super.key});
@@ -15,7 +15,7 @@ class AddCardPage extends StatelessWidget {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => const HomePage()), 
+              MaterialPageRoute(builder: (_) => const HomePage()),
               (route) => false,
             );
           },
@@ -30,17 +30,14 @@ class AddCardPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/group_37.png',
-                height: 200,
-              ),
+              Image.asset('assets/images/group_37.png', height: 200),
               const SizedBox(height: 30),
               const Text(
                 "Experience the power of financial organization\nwith our payments",
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color:   Color.fromARGB(255, 101, 130, 105),
+                  color: Color.fromARGB(255, 101, 130, 105),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -49,7 +46,9 @@ class AddCardPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const InternetPaymentPage()),
+                    MaterialPageRoute(
+                      builder: (context) => const InternetPaymentPage(),
+                    ),
                   );
                 },
                 child: const Text("+ Add your card"),

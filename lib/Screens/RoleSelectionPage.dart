@@ -9,7 +9,7 @@ class RoleSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  const Color.fromARGB(255, 207, 221, 192),
+      backgroundColor: const Color.fromARGB(255, 207, 221, 192),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -42,33 +42,30 @@ class RoleSelectionPage extends StatelessWidget {
                     label: "Admin",
                     color: const Color.fromARGB(255, 101, 130, 105),
                     onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SignIn1(),
-      ),
-    );
-  },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignIn1(),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   CustomWideButton(
                     label: "Business",
                     color: const Color.fromARGB(255, 101, 130, 105),
                     onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SignIn(),
-      ),
-    );
-  },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SignIn()),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   CustomWideButton(
                     label: "User",
                     color: const Color.fromARGB(255, 101, 130, 105),
-                    onTap: () {
-                    },
+                    onTap: () {},
                   ),
                 ],
               ),
@@ -108,10 +105,7 @@ class CustomWideButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
           ),
           elevation: 3,
-          textStyle: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         child: Text(label),
       ),

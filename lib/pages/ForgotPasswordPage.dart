@@ -19,18 +19,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     _emailController.addListener(_checkEmailInput);
   }
 
-void _checkEmailInput() {
-  final email = _emailController.text.trim();
+  void _checkEmailInput() {
+    final email = _emailController.text.trim();
 
-  RegExp emailRegExp = RegExp(
-    r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
-  );
+    RegExp emailRegExp = RegExp(
+      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+    );
 
-  setState(() {
-    isButtonEnabled = email.isNotEmpty && emailRegExp.hasMatch(email);
-  });
-}
-
+    setState(() {
+      isButtonEnabled = email.isNotEmpty && emailRegExp.hasMatch(email);
+    });
+  }
 
   @override
   void dispose() {
@@ -57,9 +56,15 @@ void _checkEmailInput() {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Forgot password 🔒", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const Text(
+              "Forgot password 🔒",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
-            const Text("Enter your email to reset Password", style: TextStyle(fontSize: 14, color: Colors.black54)),
+            const Text(
+              "Enter your email to reset Password",
+              style: TextStyle(fontSize: 14, color: Colors.black54),
+            ),
             const SizedBox(height: 30),
             TextField(
               controller: _emailController,
@@ -71,7 +76,10 @@ void _checkEmailInput() {
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 10),
-            const Text("* We will send you a message to set or reset your new password", style: TextStyle(fontSize: 12, color: Colors.red)),
+            const Text(
+              "* We will send you a message to set or reset your new password",
+              style: TextStyle(fontSize: 12, color: Colors.red),
+            ),
             const SizedBox(height: 30),
             SizedBox(
               width: double.infinity,
@@ -81,17 +89,27 @@ void _checkEmailInput() {
                     ? () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TypeCodePage(email: _emailController.text,)),
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                TypeCodePage(email: _emailController.text),
+                          ),
                         );
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isButtonEnabled ? Colors.grey.shade600 : Colors.grey.shade400,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  backgroundColor: isButtonEnabled
+                      ? Colors.grey.shade600
+                      : Colors.grey.shade400,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
-                child: const Text("Send Code", style: TextStyle(color: Colors.white)),
+                child: const Text(
+                  "Send Code",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

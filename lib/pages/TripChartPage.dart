@@ -13,7 +13,20 @@ class TripChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prices = getTripPrices();
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
 
     final maxY = prices.reduce((a, b) => a > b ? a : b) + 50;
 
@@ -61,7 +74,10 @@ class TripChartPage extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 8),
                               child: Text(
                                 months[value.toInt()],
-                                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             );
                           }
@@ -81,8 +97,12 @@ class TripChartPage extends StatelessWidget {
                         reservedSize: 40,
                       ),
                     ),
-                    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles: AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    rightTitles: AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
                   ),
                   gridData: FlGridData(show: false),
                   borderData: FlBorderData(show: false),
@@ -98,7 +118,12 @@ class TripChartPage extends StatelessWidget {
                           backDrawRodData: BackgroundBarChartRodData(
                             show: true,
                             toY: maxY,
-                            color: const Color.fromARGB(255, 207, 221, 192).withOpacity(0.2),
+                            color: const Color.fromARGB(
+                              255,
+                              207,
+                              221,
+                              192,
+                            ).withOpacity(0.2),
                           ),
                         ),
                       ],
@@ -112,11 +137,13 @@ class TripChartPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
-
                   Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const PaymentChartPage()),
-                  );                },
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentChartPage(),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.swap_horiz),
                 label: const Text("Swap View"),
                 style: ElevatedButton.styleFrom(

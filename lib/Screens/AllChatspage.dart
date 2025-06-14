@@ -38,7 +38,7 @@ class ChatsPage extends StatelessWidget {
           final chat = dummyChats[index];
           return ListTile(
             leading: const CircleAvatar(
-              backgroundColor:   Color.fromARGB(255, 207, 221, 192),
+              backgroundColor: Color.fromARGB(255, 207, 221, 192),
               child: Icon(Icons.person, color: Colors.white),
             ),
             title: Text(chat['name']),
@@ -48,9 +48,7 @@ class ChatsPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => ChatPage(
-                    ownerName: chat['name'],
-                  ),
+                  builder: (_) => ChatPage(ownerName: chat['name']),
                 ),
               );
             },

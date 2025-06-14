@@ -7,10 +7,19 @@ import 'package:intl/intl.dart';
 import 'package:yalla_r7la_new/Screens/Profile_Admin_Page.dart';
 
 class Edit_Admin_InformationPage extends StatefulWidget {
-  const Edit_Admin_InformationPage({super.key, required String name, required String email, required String phone, required String birthDate, required String gender, required String profilePicture});
+  const Edit_Admin_InformationPage({
+    super.key,
+    required String name,
+    required String email,
+    required String phone,
+    required String birthDate,
+    required String gender,
+    required String profilePicture,
+  });
 
   @override
-  State<Edit_Admin_InformationPage> createState() => _EditInformationPageState();
+  State<Edit_Admin_InformationPage> createState() =>
+      _EditInformationPageState();
 }
 
 class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
@@ -79,7 +88,9 @@ class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
   }
 
   bool _isEmailValid(String email) {
-    RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+    RegExp emailRegExp = RegExp(
+      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+    );
     return emailRegExp.hasMatch(email);
   }
 
@@ -90,12 +101,15 @@ class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 207, 221, 192),
+      backgroundColor: const Color.fromARGB(255, 207, 221, 192),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: const BackButton(color: Colors.black),
-        title: const Text('Edit Information', style: TextStyle(color: Colors.black)),
+        title: const Text(
+          'Edit Information',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -114,9 +128,15 @@ class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
                   CircleAvatar(
                     radius: 70,
                     backgroundColor: Colors.grey[300],
-                    backgroundImage: _imageFile != null ? FileImage(_imageFile!) : null,
+                    backgroundImage: _imageFile != null
+                        ? FileImage(_imageFile!)
+                        : null,
                     child: _imageFile == null
-                        ? const Icon(Icons.person, size: 70, color: Colors.white)
+                        ? const Icon(
+                            Icons.person,
+                            size: 70,
+                            color: Colors.white,
+                          )
                         : null,
                   ),
                   Positioned(
@@ -140,15 +160,26 @@ class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
               const SizedBox(height: 10),
               _buildTextField("User Name", userNameController),
               const SizedBox(height: 10),
-              _buildTextField("Email", emailController, keyboardType: TextInputType.emailAddress, validator: (value) {
-                if (!_isEmailValid(value!)) return "Enter a valid email";
-                return null;
-              }),
+              _buildTextField(
+                "Email",
+                emailController,
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (!_isEmailValid(value!)) return "Enter a valid email";
+                  return null;
+                },
+              ),
               const SizedBox(height: 10),
-              _buildTextField("Phone Number", phoneController, keyboardType: TextInputType.phone, validator: (value) {
-                if (!_isPhoneValid(value!)) return "Phone must start with '+'";
-                return null;
-              }),
+              _buildTextField(
+                "Phone Number",
+                phoneController,
+                keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (!_isPhoneValid(value!))
+                    return "Phone must start with '+'";
+                  return null;
+                },
+              ),
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -156,7 +187,10 @@ class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
                     child: GestureDetector(
                       onTap: () => _pickDate(birthDateController),
                       child: AbsorbPointer(
-                        child: _buildTextField("Birth Date", birthDateController),
+                        child: _buildTextField(
+                          "Birth Date",
+                          birthDateController,
+                        ),
                       ),
                     ),
                   ),
@@ -169,14 +203,17 @@ class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
                   labelText: "Gender",
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 items: const [
                   DropdownMenuItem(value: "Male", child: Text("Male")),
                   DropdownMenuItem(value: "Female", child: Text("Female")),
                 ],
                 onChanged: (value) => setState(() => selectedGender = value),
-                validator: (value) => value == null ? "Please select gender" : null,
+                validator: (value) =>
+                    value == null ? "Please select gender" : null,
               ),
               const SizedBox(height: 20),
               Align(
@@ -184,11 +221,16 @@ class _EditInformationPageState extends State<Edit_Admin_InformationPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      String fullName = '${firstNameController.text} ${lastNameController.text}'.trim();
+                      String fullName =
+                          '${firstNameController.text} ${lastNameController.text}'
+                              .trim();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Profile_Admin_Page(fullName: fullName, email: emailController.text),
+                          builder: (context) => Profile_Admin_Page(
+                            fullName: fullName,
+                            email: emailController.text,
+                          ),
                         ),
                       );
                     }

@@ -1,5 +1,11 @@
 // pages/HomePage.dart
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:yalla_r7la_new/core/service/api_service.dart';
+import 'package:yalla_r7la_new/core/service/url_manager.dart';
+import 'package:yalla_r7la_new/models/get_destination/get_destination.dart';
 import 'package:yalla_r7la_new/pages/AddCardPage.dart';
 import 'package:yalla_r7la_new/pages/CardDetailsPage.dart';
 import 'package:yalla_r7la_new/pages/NewTripPage.dart';
@@ -20,7 +26,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  List<Map<String, dynamic>> trips = [];
+  List<GetDestination> trips = [];
+  final String token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2hhbWVkYXphbHk3NzJAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiJjODdjMDU5OS0zNGIxLTQ4NTEtYTdlMy1kYTYyNWEwYzEwODQiLCJqdGkiOiI1MjBiMmI3My1mNDY2LTQ4ZjYtYTJmYi05MGJjZTJmZWQ3ZjkiLCJVc2VyVHlwZSI6Ik93bmVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiT3duZXIiLCJleHAiOjE3NDk5OTY5MDYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDY5NTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTU1In0.nnJ11TzOSCft_Kzw6rCxEZlSc7kA5-OPHZqaxifrX44";
+  @override
+  void initState() {
+    getTripsFromServer();
+    super.initState();
+  }
 
   void _onBottomNavTapped(int index) {
     setState(() {
@@ -35,7 +48,9 @@ class _HomePageState extends State<HomePage> {
     } else if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => ProfilePage(email: '', fullName: '')),
+        MaterialPageRoute(
+          builder: (_) => ProfilePage(email: '', fullName: ''),
+        ),
       );
     } else if (index == 2) {
       Navigator.push(
@@ -51,43 +66,63 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _navigateToAddTrip() async {
-    final result = await Navigator.push<dynamic>(
+    // final result =
+    await Navigator.push<dynamic>(
       context,
       MaterialPageRoute(builder: (_) => const NewTripPage()),
     );
 
-    if (result != null) {
-      setState(() {
-        if (result is Map<String, dynamic>) {
-          trips.add(result);
-        }
-      });
-    }
+    // if (result != null) {
+    //   setState(() {
+    //     if (result is Map<String, dynamic>) {
+    //       trips.add(result);
+    //     }
+    //   });
+    // }
   }
 
   void _navigateToTripDetails(int index) async {
-    final result = await Navigator.push<dynamic>(
+    // final result =
+    await Navigator.push<GetDestination>(
       context,
       MaterialPageRoute(
         builder: (context) => TripDetailsPage(trip: trips[index]),
       ),
     );
 
-    if (result != null) {
-      setState(() {
-        if (result == 'delete') {
-          trips.removeAt(index);
-        } else if (result is Map<String, dynamic>) {
-          final tripId = result['id'];
-          final tripIndex = trips.indexWhere((trip) => trip['id'] == tripId);
-          if (tripIndex != -1) {
-            trips[tripIndex] = result;
-          } else {
-            trips.add(result);
-          }
-        }
-      });
-    }
+    // if (result != null) {
+    //   setState(() {
+    //     if (result == 'delete') {
+    //       trips.removeAt(index);
+    //     } else if (result is Map<String, dynamic>) {
+    //       final tripId = result.destinationId;
+    //       final tripIndex = trips.indexWhere(
+    //         (trip) => trip.destinationId == tripId,
+    //       );
+    //       if (tripIndex != -1) {
+    //         trips[tripIndex] = result;
+    //       } else {
+    //         trips.add(result);
+    //       }
+    //     }
+    //   });
+    // }
+  }
+
+  Future<void> getTripsFromServer() async {
+    await ApiService(dio: Dio())
+        .getWithToken(
+          endPoint: UrlManager().getDestinationWithImages,
+          token: token,
+        )
+        .then((r) {
+          log(r.toString());
+          trips = (r.data as List<dynamic>)
+              .map((item) => GetDestination.fromJson(item))
+              .toList();
+          setState(() {});
+        });
+    // GetDestination.fromJson(getTrips as Map<String, dynamic>);
   }
 
   @override
@@ -114,7 +149,8 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => ProfilePage(email: '', fullName: '')),
+                    builder: (_) => ProfilePage(email: '', fullName: ''),
+                  ),
                 );
               },
             ),
@@ -147,9 +183,8 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const CardDetailsPage(
-                            userCards: [],
-                          )),
+                    builder: (context) => const CardDetailsPage(userCards: []),
+                  ),
                 );
               },
             ),
@@ -181,9 +216,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(
           "Hi! You want to add new items?",
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 101, 130, 105),
         elevation: 6,
@@ -233,9 +266,10 @@ class _HomePageState extends State<HomePage> {
                     child: const Text(
                       "ALL",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   TextButton(
@@ -245,8 +279,10 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text("History",
-                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                    child: const Text(
+                      "History",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
                   ),
                   TextButton(
                     onPressed: () {},
@@ -255,8 +291,10 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text("Medical",
-                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                    child: const Text(
+                      "Medical",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
                   ),
                   TextButton(
                     onPressed: () {},
@@ -265,8 +303,10 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text("Adventure",
-                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                    child: const Text(
+                      "Adventure",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -279,8 +319,10 @@ class _HomePageState extends State<HomePage> {
                       itemCount: trips.length,
                       itemBuilder: (context, index) {
                         final trip = trips[index];
-                        final List<String> imageData = trip['imageData'] != null
-                            ? List<String>.from(trip['imageData'])
+                        final List<String> imageData = trip.images != null
+                            ? trip.images!
+                                  .map((e) => e.imagePath ?? '')
+                                  .toList()
                             : [];
                         return GestureDetector(
                           onTap: () => _navigateToTripDetails(index),
@@ -304,26 +346,35 @@ class _HomePageState extends State<HomePage> {
                                         height: 150,
                                         width: double.infinity,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) =>
-                                            const Text("Image not available"),
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                const Text(
+                                                  "Image not available",
+                                                ),
                                       ),
                                     ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          trip['title'] ?? 'No Title',
+                                          trip.name ?? 'No Title',
                                           style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(255, 101, 130, 105),
+                                            color: Color.fromARGB(
+                                              255,
+                                              101,
+                                              130,
+                                              105,
+                                            ),
                                           ),
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          trip['location'] ?? 'No Location',
+                                          trip.location ?? 'No Location',
                                           style: const TextStyle(
                                             fontSize: 16,
                                             color: Colors.grey,
@@ -331,7 +382,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          'Cost: ${trip['cost']?.toString() ?? '0.0'} EGP',
+                                          'Cost: ${trip.cost?.toString() ?? '0.0'} EGP',
                                           style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
@@ -359,22 +410,13 @@ class _HomePageState extends State<HomePage> {
         unselectedItemColor: Colors.grey,
         backgroundColor: const Color.fromARGB(255, 101, 130, 105),
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             label: "Notifications",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: "Chat",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
             label: "Payment",
